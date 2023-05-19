@@ -27,3 +27,49 @@ kings = 13
 6. console log both card objects, and a message declaring which one has the higher value
 
 */
+
+//
+class Deck {
+	suits = ["spades", "clovers", "hearts", "diamonds"];
+	values = [
+		"ace",
+		"2",
+		"3",
+		"4",
+		"5",
+		"6",
+		"7",
+		"8",
+		"9",
+		"10",
+		"jack",
+		"queen",
+		"king",
+	];
+
+	generateRandomSuit() {
+		return this.suits[Math.floor(Math.random() * (this.suits.length - 1))];
+	}
+
+	generateRandomValue() {
+		return Math.floor(Math.random() * (this.values.length - 1));
+	}
+
+	generateCard() {
+		let value = this.generateRandomValue();
+		let suit = this.generateRandomSuit();
+		console.log(`suit "${suit}" : value "${value}"`);
+		return value;
+	}
+}
+
+let deck1 = new Deck().generateCard();
+let deck2 = new Deck().generateCard();
+
+if (deck1 > deck2) {
+	console.log(`Player 1 Wins!`);
+} else if (deck1 === deck2) {
+	console.log(`Draw!`);
+} else {
+	console.log(`Player 2 Wins!`);
+}

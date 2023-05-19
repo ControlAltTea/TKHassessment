@@ -1,8 +1,10 @@
 /* Problem 1 */
-/* Skill: Git
+/* Skill: Git`
 You want to grow a new branch from any commit. Identify the code you will use to swtich to "HEAD-5" and create a branch named 'testbranch'
 */
-//YOUR CODE HERE
+
+// checks out new branch called testbranch from 5 commits behind
+`git checkout -b testbranch HEAD~5`;
 
 /* Problem 2 */
 /*Skill: React, API call  
@@ -13,33 +15,39 @@ API ENDPOINT: https://www.reddit.com/r/react.json
 complete the code as per the given instructions:
 */
 
+import React from "react";
+import * as ReactDOM from "react-dom";
 
-class APICaller extends React.Component{
-  callApi(){
+class APICaller extends React.Component {
+  callApi() {
     //#1 Implement a fetch method with the given API ENDPOINT
-    // YOUR CODE HERE 
-    .then((result)=>{
-      //#2 Return the result in json format
-      //YOUR CODE HERE 
-    }).then((jsonData)=>{
-      //#3 Print/log the jsonData in the console of the browser
-      //YOUR CODE HERE 
-    })
+    fetch("https://www.reddit.com/r/react.json")
+      .then((result) => {
+        //#2 Return the result in json format
+        return result.json();
+      })
+      .then((jsonData) => {
+        //#3 Print/log the jsonData in the console of the browser
+        console.log(jsonData);
+      });
   }
-render(){
-  return <div>
-    <button 
-  //#4 Implement an onCLick functionality to the button such that it calls the callApi() function when it is clicked. 
-  // YOUR CODE HERE 
-    >Call the API now.</button>
-  </div>
+
+  render() {
+    return (
+      <div>
+        <button
+          //#4 Implement an onCLick functionality to the button such that it calls the callApi() function when it is clicked.
+          // YOUR CODE HERE
+          onClick={this.callApi}
+        >
+          Call the API now.
+        </button>
+      </div>
+    );
+  }
 }
-}
-React.render(
-  //#5 Implement the APICaller component appropiately into the render method
-  //YOUR CODE HERE 
-  , document.getElementById('myapicaller')
-)
+
+ReactDOM.render(<APICaller />, document.getElementById("root"));
 
 
 /* Problem 3 */
@@ -50,10 +58,9 @@ Please write an example of a recursive function, and comment each line
 */
 /*EXPLANATION HERE (1 paragraph) */
 
-function myRecursiveFunction(){
+function myRecursiveFunction() {
   //YOUR CODE WITH COMMENTS HERE
 }
-
 
 /* Problem 4 */
 /* Skill: algorithms 
@@ -65,7 +72,6 @@ with explanation
 /* Sorting algorithms intro explanation HERE (1-2 paragraphs) */
 
 /*Bubble sort example HERE*/
-
 
 /* Problem 5 */
 /*Skill: Leetcode Algorithms
@@ -83,6 +89,33 @@ solve the following leetcode in JavaScript:
 https://leetcode.com/problems/longest-substring-with-at-least-k-repeating-characters/
 
 and paste your solution here. Please comment each line of your code to explain it, and be prepared to explain in the follow up interview.
+/**
+ * @param {string} s
+ * @param {number} k
+ * @return {number}
+ */
+var longestSubstring = function (substring, minLength) {
+  let map = new Map();
+  for (const letter of substring) {
+    const frequency = map.get(letter) ?? 0;
+    map.set(letter, frequency + 1);
+  }
+  console.log(map);
+
+  let total = 0;
+
+  for (const [_letter, frequency] of map) {
+    if (frequency >= minLength) {
+      total += frequency;
+    }
+  }
+  console.log(total);
+  return total;
+};
+
+longestSubstring("ababb", 2);
+
+
 
 /* Problem 7 */
 /*Skill: SQL
