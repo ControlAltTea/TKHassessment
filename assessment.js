@@ -94,21 +94,41 @@ and paste your solution here. Please comment each line of your code to explain i
  * @param {number} k
  * @return {number}
  */
+
+// renamed the parameters for better readability
 var longestSubstring = function (substring, minLength) {
+  // creating a map to log the frequency of how many times a single letter occurs in the substring
   let map = new Map();
+
+  // looping over the substring
   for (const letter of substring) {
+    // we will 'get' the letter and store it
+    // if the letter is null or undefined, we will simply store '0'
     const frequency = map.get(letter) ?? 0;
+    // set the 'letter' key and increases the 'frequency' value by 1
+    // so it could look like
+    // {
+    //    "a" : 2,
+    //    "b" : 1
+    // }
     map.set(letter, frequency + 1);
   }
-  console.log(map);
 
+  // the tasks require that we add the values that are equal to or greater than the minLength
+  // so if minLength is 2, each letter needs to be 2+ to be added to the total
   let total = 0;
 
+  // we will deconstruct the map, which currently has a {letter:frequency} key/value pair
+  // by deconstructing, we can access the key and the value BUT we are only using frequency
+  // so we will add an underscore before 'letter' to indicate it is not to be manipulated or accessed
   for (const [_letter, frequency] of map) {
+    // here is where we check if frequency is greater than or equal to the minLength
     if (frequency >= minLength) {
+      // if so, we are allowed to add the frequency to the total
       total += frequency;
     }
   }
+  
   console.log(total);
   return total;
 };
